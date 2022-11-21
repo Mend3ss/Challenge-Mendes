@@ -1,0 +1,4 @@
+module "Dev" {
+  source = "../../infra"
+}
+
