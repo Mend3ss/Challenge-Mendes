@@ -23,13 +23,13 @@ variable "EC2_Name" {
 variable "EC2_Ami" {
   description = "Ami version of our Instance"
   type        = string
-  default     = "ami-09d3b3274b6c5d4aa"
+  default     = "ami-08c40ec9ead489470"
 }
 
 variable "EC2_Size" {
   description = "Size that will be used in EC2"
   type        = string
-  default     = "t2.micro"
+  default     = "t2.medium"
 }
 
 variable "NIC_Name" {

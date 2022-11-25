@@ -22,6 +22,22 @@ resource "aws_security_group" "my_Public_Subnet_NSG" {
   tags = {
     Name = "${local.Company_Name_And_Enviroment_Dev}-${var.Public_Subnet_NSG_Name}"
   }
+
+  # ingress {
+  #   description      = "TLS from VPC"
+  #   from_port        = 22
+  #   to_port          = 22
+  #   protocol         = "tcp"
+  #   cidr_blocks      = ["189.62.47.222/32", "54.232.26.136/32","186.192.143.189/32"]
+  # }
+
+  # egress {
+  #   from_port        = 0
+  #   to_port          = 0
+  #   protocol         = "-1"
+  #   cidr_blocks      = ["0.0.0.0/0"]
+  #   ipv6_cidr_blocks = ["::/0"]
+  # }
 }
 
 
@@ -39,12 +55,12 @@ resource "aws_security_group_rule" "my_Public_Subnet_NSG_Inbound" {
 
   for_each = local.Public_Subnet_Rules_Map
 
-  type              = "ingress"
-  description       = "TLS from VPC"
-  from_port         = 0
-  to_port           = each.value
-  protocol          = "tcp"
-  cidr_blocks       = ["189.62.47.222/32", "54.232.26.136/32"]
+  type        = "ingress"
+  description = "TLS from VPC"
+  from_port   = 0
+  to_port     = each.value
+  protocol    = "tcp"
+  cidr_blocks = ["189.62.47.222/32", "54.232.26.136/32", "186.192.143.189/32"]
 
   security_group_id = aws_security_group.my_Public_Subnet_NSG.id
 }

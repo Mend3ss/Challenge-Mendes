@@ -1,0 +1,5 @@
+#Creating a "class" to use in playbook
+[ec2-docker-challenge]
+
+#Declaring the target host IP
+3.229.241.203

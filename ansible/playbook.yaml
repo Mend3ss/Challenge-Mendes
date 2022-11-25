@@ -1,0 +1,31 @@
+#Using the class created in hosts.yaml
+- hosts: ec2-docker-challenge
+  #Creating tasks to use in the server
+  tasks:
+  
+  - name: installing docker
+    #Downloading packages and requisites
+    apt:
+      pkg:
+      - docker.io
+      update_cache: yes
+    #Using the root permission
+    become: yes
+
+    #We can execute one or more commands on "shell" using < ; > Example: shell: "cd test/ ; mkdir aaaa
+
+  - name: pulling web-site-1 image
+    shell: "docker pull joaomendes3822/web-site-1:1"
+    become: yes
+
+  - name: pulling web-site-1 image
+    shell: "docker pull joaomendes3822/web-site-2:1"
+    become: yes
+
+  - name: running container 1
+    shell: "docker run -d -p 8080:80 joaomendes3822/web-site-1:1"
+    become: yes
+
+  - name: running container 2
+    shell: "docker run -d -p 8081:80 joaomendes3822/web-site-2:1"
+    become: yes

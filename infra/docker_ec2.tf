@@ -9,7 +9,7 @@ resource "aws_network_interface" "my_Docker_EC2_NIC" {
   subnet_id       = aws_subnet.my_Public_Subnet[count.index].id
   private_ips     = ["192.168.1.10"]
   security_groups = [aws_security_group.my_Public_Subnet_NSG.id]
-  
+
   tags = {
     Name = "Docker_EC2_NIC"
   }
@@ -22,7 +22,7 @@ resource "aws_instance" "my_Docker_EC2" {
 
   ami           = var.EC2_Ami
   instance_type = var.EC2_Size
-  key_name = "docker_ec2_key"
+  key_name      = "AWS-Docker-Key"
 
   network_interface {
     network_interface_id = aws_network_interface.my_Docker_EC2_NIC[count.index].id
