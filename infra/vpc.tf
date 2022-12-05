@@ -1,5 +1,6 @@
 #VPC
 #Internet Gateway
+#Route
 
 resource "aws_vpc" "my_VPC" {
   count                = 2
