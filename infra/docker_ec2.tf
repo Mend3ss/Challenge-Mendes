@@ -22,7 +22,7 @@ resource "aws_instance" "my_Docker_EC2" {
 
   ami           = var.EC2_Ami
   instance_type = var.EC2_Size
-  key_name      = "AWS-Docker-Key"
+  key_name      = "Name of your key"
 
   network_interface {
     network_interface_id = aws_network_interface.my_Docker_EC2_NIC[count.index].id
