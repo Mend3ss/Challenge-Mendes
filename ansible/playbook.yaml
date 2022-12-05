@@ -2,14 +2,19 @@
 - hosts: ec2-docker-challenge
   #Creating tasks to use in the server
   tasks:
-  
-  - name: installing docker
+
+  - name: installing docker and nginx
     #Downloading packages and requisites
     apt:
       pkg:
       - docker.io
+      - nginx
       update_cache: yes
     #Using the root permission
+    become: yes
+
+  - name: creating docker network
+    shell: "docker network create --driver bridge webservers"
     become: yes
 
     #We can execute one or more commands on "shell" using < ; > Example: shell: "cd test/ ; mkdir aaaa
@@ -23,9 +28,13 @@
     become: yes
 
   - name: running container 1
-    shell: "docker run -d -p 8080:80 joaomendes3822/web-site-1:1"
+    shell: "docker run -d --name web-site-1 --network webservers -p 8080:80 joaomendes3822/web-site-1:1"
     become: yes
 
   - name: running container 2
-    shell: "docker run -d -p 8081:80 joaomendes3822/web-site-2:1"
+    shell: "docker run -d --name web-site-2 --network webservers -p 8081:80 joaomendes3822/web-site-2:1"
+    become: yes
+  
+  - name: running nginx container
+    shell: "docker run -d --name nginx --network webservers -p 81:81 nginx"
     become: yes
