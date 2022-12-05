@@ -32,7 +32,7 @@ resource "aws_security_group_rule" "SSH_Rule_VPC_1" {
   from_port   = 0
   to_port     = 22
   protocol    = "tcp"
-  cidr_blocks = ["189.62.47.222/32", "54.232.26.136/32", "186.192.143.189/32"]
+  cidr_blocks = ["Your IP"]
 
   security_group_id = aws_security_group.my_Public_Subnet_NSG_VPC_1.id
 }
